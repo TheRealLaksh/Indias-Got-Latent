@@ -23,7 +23,7 @@ function App() {
             IGL ARCHIVES
           </Link>
           
-          {/* REMOVED LOGIN BUTTON HERE */}
+          {/* REMOVED LOGIN BUTTON */}
           
         </nav>
 

@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { episodes } from '../../data/showData';
-import { ArrowLeft, Download, ThumbsUp, Share2, AlertTriangle, Eye, Calendar } from 'lucide-react';
+import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EpisodePage = () => {
   const { id } = useParams();
   const episode = episodes.find(ep => ep.id === parseInt(id));
 
-  // --- STATE FOR INTERACTIVE BUTTONS ---
-  // Initialize with the data from the file (randomized range 4k-15k)
+  // --- LOCAL STATE FOR STATS ---
   const [likes, setLikes] = useState(episode ? episode.likes : 0);
   const [shares, setShares] = useState(episode ? episode.shares : 0);
   const [hasLiked, setHasLiked] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Reset state when episode changes
+    // Reset state when episode ID changes
     if (episode) {
       setLikes(episode.likes);
       setShares(episode.shares);
@@ -24,11 +23,9 @@ const EpisodePage = () => {
     }
   }, [id, episode]);
 
-  if (!episode) {
-    return <div className="text-white text-center mt-20">Episode not found</div>;
-  }
+  if (!episode) return <div className="text-white pt-20 text-center">Episode Not Found</div>;
 
-  // --- HANDLERS ---
+  // --- BUTTON HANDLERS ---
   const handleLike = () => {
     if (!hasLiked) {
       setLikes(prev => prev + 1);
@@ -41,109 +38,116 @@ const EpisodePage = () => {
 
   const handleShare = () => {
     setShares(prev => prev + 1);
-    // Simple visual feedback
-    alert(`Link copied to clipboard! (Shares: ${shares + 1})`);
+    alert(`Link copied to clipboard! (Total Shares: ${shares + 1})`);
   };
 
-  // Helper to format numbers (e.g., 14200 -> 14.2K)
   const formatCount = (num) => {
     return num > 1000 ? (num / 1000).toFixed(1) + 'K' : num;
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-20">
+    <div className="min-h-screen bg-[#050505] flex flex-col pt-20 md:pt-0 md:justify-center items-center p-0 md:p-8">
       
-      {/* 1. CINEMATIC VIDEO PLAYER (Full Width) */}
-      <div className="w-full max-w-[1800px] mx-auto px-0 md:px-4 mb-6">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="relative w-full aspect-video bg-black shadow-2xl rounded-none md:rounded-xl overflow-hidden"
-        >
-          <iframe
-            src={episode.videoUrl} 
-            className="w-full h-full"
-            allow="autoplay; fullscreen"
-            title={episode.title}
-            frameBorder="0"
-          ></iframe>
-        </motion.div>
-      </div>
+      {/* Back Button (Mobile Only) */}
+      <Link to="/" className="md:hidden absolute top-4 left-4 z-50 text-white flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full">
+        <ArrowLeft size={16} /> Back
+      </Link>
 
-      {/* 2. INFO & ACTIONS BAR */}
-      <div className="max-w-7xl mx-auto px-6 pb-20">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="relative w-full max-w-[1600px] bg-[#121212] rounded-none md:rounded-xl overflow-hidden shadow-2xl flex flex-col md:flex-row border border-gray-800 h-auto md:h-[85vh]"
+      >
         
-        {/* Navigation */}
-        <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-latent-yellow mb-4 transition-colors text-sm font-mono uppercase tracking-widest">
-          <ArrowLeft size={14} /> Back to Archives
+        {/* CLOSE / BACK BUTTON (Desktop) */}
+        <Link 
+          to="/"
+          className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-[#E50914] rounded-full text-white transition-all group hidden md:block"
+        >
+          <X size={24} className="group-hover:rotate-90 transition-transform" />
         </Link>
 
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
+        {/* --- LEFT: VIDEO PLAYER (65-70%) --- */}
+        <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full">
+          <div className="w-full h-full">
+             <iframe
+              src={episode.videoUrl} 
+              className="w-full h-full"
+              allow="autoplay; fullscreen"
+              title={episode.title}
+              frameBorder="0"
+            ></iframe>
+          </div>
+        </div>
+
+        {/* --- RIGHT: METADATA & ACTIONS (30-35%) --- */}
+        <div className="w-full md:w-[30%] p-6 md:p-8 bg-[#121212] overflow-y-auto flex flex-col justify-between border-l border-gray-800 h-auto md:h-full">
           
-          {/* LEFT: Title & Stats */}
-          <div className="flex-1">
-            <h1 className="text-2xl md:text-4xl font-anton text-white mb-3 uppercase leading-tight">
+          <div>
+            {/* Breadcrumbs */}
+            <div className="flex items-center gap-2 text-xs text-gray-500 mb-4 font-mono">
+              <span>ARCHIVE</span>
+              <span>/</span>
+              <span>SEASON 1</span>
+              <span>/</span>
+              <span className="text-latent-yellow animate-pulse">PLAYING</span>
+            </div>
+
+            {/* Title */}
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-anton leading-tight uppercase">
               {episode.title}
-            </h1>
+            </h2>
             
-            <div className="flex items-center gap-4 text-sm text-gray-400 mb-6 font-mono">
-              <span className="flex items-center gap-1"><Eye size={14} /> {formatCount(likes * 12)} Views</span>
-              <span className="flex items-center gap-1"><Calendar size={14} /> 2 days ago</span>
-              <span className="bg-white/10 text-white px-2 py-0.5 rounded text-xs">U/A 16+</span>
+            {/* Stats Tag */}
+            <div className="flex items-center gap-4 text-gray-400 text-sm mb-6 font-mono">
+               <span className="bg-gray-800 px-2 py-1 rounded text-white">HD</span>
+               <span className="flex items-center gap-1 text-green-500">98% Match</span>
+               <span>18+</span>
+            </div>
+
+            {/* Description */}
+            <p className="text-gray-300 text-sm leading-relaxed border-l-2 border-latent-yellow pl-4 italic mb-8">
+              {episode.description}
+            </p>
+          </div>
+
+          {/* ACTIONS SECTION */}
+          <div className="space-y-4 pb-8 md:pb-0">
+            
+            <button className="w-full py-4 bg-white text-black font-bold uppercase tracking-wider hover:bg-latent-yellow transition-colors flex items-center justify-center gap-2 rounded-sm">
+              <Download size={18} /> Download Episode
+            </button>
+            
+            <div className="flex gap-4">
+               {/* LIKE BUTTON */}
+               <button 
+                 onClick={handleLike}
+                 className={`flex-1 py-3 border border-gray-700 font-medium transition-colors flex items-center justify-center gap-2 rounded-sm ${
+                   hasLiked ? 'bg-latent-yellow text-black border-latent-yellow' : 'bg-transparent text-white hover:bg-gray-800'
+                 }`}
+               >
+                  <ThumbsUp size={18} fill={hasLiked ? "black" : "none"} /> 
+                  {formatCount(likes)}
+               </button>
+
+               {/* SHARE BUTTON */}
+               <button 
+                 onClick={handleShare}
+                 className="flex-1 py-3 bg-transparent border border-gray-700 text-white font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 rounded-sm"
+               >
+                  <Share2 size={18} /> {formatCount(shares)}
+               </button>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs text-red-500 mt-4 justify-center opacity-60">
+              <AlertTriangle size={12} />
+              <span>DMCA Protected Content</span>
             </div>
           </div>
 
-          {/* RIGHT: Action Buttons (The "Working" Part) */}
-          <div className="flex items-center gap-3 w-full lg:w-auto">
-            
-            {/* LIKE BUTTON */}
-            <button 
-              onClick={handleLike}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-all ${
-                hasLiked 
-                ? 'bg-white text-black' 
-                : 'bg-white/10 hover:bg-white/20 text-white'
-              }`}
-            >
-              <ThumbsUp size={20} fill={hasLiked ? "black" : "none"} />
-              <span>{formatCount(likes)}</span>
-            </button>
-
-            {/* SHARE BUTTON */}
-            <button 
-              onClick={handleShare}
-              className="flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-full text-white font-bold transition-all"
-            >
-              <Share2 size={20} />
-              <span>Share</span>
-            </button>
-
-            {/* DOWNLOAD BUTTON (Fake but styled) */}
-            <button className="flex items-center gap-2 px-6 py-3 bg-latent-yellow hover:bg-yellow-400 rounded-full text-black font-bold transition-all">
-              <Download size={20} />
-              <span className="hidden md:inline">Download</span>
-            </button>
-          </div>
-
         </div>
 
-        {/* DESCRIPTION BOX */}
-        <div className="mt-8 p-6 bg-[#111] rounded-xl border border-gray-800">
-          <div className="flex gap-2 text-sm font-bold text-white mb-2">
-            <span>Description</span>
-          </div>
-          <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-            {episode.description}
-          </p>
-          
-          <div className="mt-4 pt-4 border-t border-gray-800 flex items-center gap-2 text-xs text-red-500 font-mono uppercase">
-            <AlertTriangle size={14} />
-            Latent Content Warning: High levels of cringe detected.
-          </div>
-        </div>
-
-      </div>
+      </motion.div>
     </div>
   );
 };
