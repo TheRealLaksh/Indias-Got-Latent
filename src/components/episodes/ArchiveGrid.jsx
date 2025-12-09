@@ -19,8 +19,8 @@ const ArchiveGrid = ({ episodes }) => {
     <div className="w-full max-w-7xl mx-auto px-6 py-20">
       
       <div className="flex items-end justify-between mb-12 border-b border-gray-800 pb-4">
-        {/* INCREASED TRACKING HERE */}
-        <h2 className="text-4xl md:text-5xl font-anton text-white uppercase tracking-wide">
+        {/* REMOVED drop-shadow-lg */}
+        <h2 className="text-4xl md:text-5xl font-anton text-white uppercase tracking-normal">
           The Archives
         </h2>
         <span className="text-gray-500 font-mono hidden md:block">TOTAL DISAPPOINTMENTS: {episodes.length}</span>
@@ -47,17 +47,17 @@ const ArchiveGrid = ({ episodes }) => {
                   <PlayCircle size={48} className="text-latent-yellow" fill="black" />
                 </div>
 
-                <div className="absolute bottom-2 right-2 bg-black text-white text-xs px-1 font-mono">
-                  24:00
+                <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 font-mono rounded">
+                  {ep.duration}
                 </div>
               </div>
 
               <div>
-                {/* INCREASED TRACKING HERE */}
-                <h3 className="text-lg font-bold text-white group-hover:text-latent-yellow transition-colors line-clamp-2 leading-tight uppercase font-anton mb-2 tracking-wide">
+                {/* REMOVED drop-shadow-md */}
+                <h3 className="text-lg font-bold text-white group-hover:text-latent-yellow transition-colors line-clamp-2 leading-snug uppercase font-anton mb-2 tracking-normal">
                   {ep.title}
                 </h3>
-                <p className="text-gray-500 text-xs line-clamp-2">
+                <p className="text-gray-500 text-xs line-clamp-2 font-mono">
                   {ep.description}
                 </p>
               </div>

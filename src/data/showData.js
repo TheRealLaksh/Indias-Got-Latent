@@ -7,7 +7,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep1.jpg",
     videoUrl: "https://drive.google.com/file/d/1o66J8KkpLNG1fU1d7AzK0nziH78FT73s/preview",
     likes: 14205,
-    shares: 8900
+    shares: 8900,
+    duration: "43:24"
   },
 
   // --- EPISODE 2 ---
@@ -18,7 +19,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep2.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_SHOOTING_VIDEO_ID/preview",
     likes: 8430,
-    shares: 4120
+    shares: 4120,
+    duration: "1:06:09"
   },
 
   // --- EPISODE 3 ---
@@ -29,7 +31,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep3.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
     likes: 15100,
-    shares: 12400
+    shares: 12400,
+    duration: "1:05:19"
   },
 
   // --- EPISODE 4 ---
@@ -40,7 +43,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep4.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
     likes: 9200,
-    shares: 5600
+    shares: 5600,
+    duration: "1:04:57"
   },
 
   // --- EPISODE 5 ---
@@ -51,7 +55,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep5.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
     likes: 11500,
-    shares: 7800
+    shares: 7800,
+    duration: "1:07:26"
   },
 
   // --- EPISODE 6 ---
@@ -62,7 +67,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep6.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
     likes: 6700,
-    shares: 3200
+    shares: 3200,
+    duration: "1:05:28"
   },
 
    // --- EPISODE 7 ---
@@ -73,7 +79,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep7.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 7800,
-    shares: 4500
+    shares: 4500,
+    duration: "1:01:20"
   },
 
   // --- EPISODE 8 ---
@@ -84,7 +91,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep8.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 13900,
-    shares: 9100
+    shares: 9100,
+    duration: "54:32"
   },
 
   // --- EPISODE 9 ---
@@ -95,7 +103,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep9.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 14800,
-    shares: 11200
+    shares: 11200,
+    duration: "1:04:00"
   },
 
   // --- EPISODE 10 ---
@@ -106,7 +115,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep10.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 10500,
-    shares: 6700
+    shares: 6700,
+    duration: "1:08:25"
   },
 
   // --- EPISODE 11 ---
@@ -117,7 +127,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep11.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 9800,
-    shares: 5400
+    shares: 5400,
+    duration: "1:15:11"
   },
 
   // --- EPISODE 12 ---
@@ -128,7 +139,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/ep12.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 15500,
-    shares: 13000
+    shares: 13000,
+    duration: "1:14:52"
   },
 
   // --- BONUS EPISODES ---
@@ -140,7 +152,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/bonus1.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 12500,
-    shares: 8200
+    shares: 8200,
+    duration: "36:07"
   },
 
   {
@@ -150,7 +163,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/bonus2.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 11200,
-    shares: 7100
+    shares: 7100,
+    duration: "52:08"
   },
 
   {
@@ -160,7 +174,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/bonus3.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 8900,
-    shares: 4300
+    shares: 4300,
+    duration: "54:23"
   },
 
   {
@@ -170,7 +185,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/bonus4.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 14200,
-    shares: 9800
+    shares: 9800,
+    duration: "1:12:25"
   },
 
   {
@@ -180,7 +196,8 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/bonus5.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 7500,
-    shares: 3100
+    shares: 3100,
+    duration: "1:29:05"
   },
 
   {
@@ -190,6 +207,7 @@ export const episodes = [
     thumbnail: "/assets/thumbnails/bonus6.jpg",
     videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
     likes: 13500,
-    shares: 8900
+    shares: 8900,
+    duration: "1:03:09"
   }
 ];

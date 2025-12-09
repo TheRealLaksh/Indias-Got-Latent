@@ -49,12 +49,10 @@ const EpisodePage = ({ type }) => {
 
   const handleShare = async () => {
     setShares(prev => prev + 1);
-    
     const baseUrl = "https://indias-got-latent.netlify.app";
     const sharePath = type === 'standard' 
       ? `/episodes/${epId}` 
       : `/bonus-episodes/${epId}`;
-      
     const shareUrl = `${baseUrl}${sharePath}`;
 
     try {
@@ -92,7 +90,6 @@ const EpisodePage = ({ type }) => {
         animate={{ opacity: 1, scale: 1 }}
         className="relative w-full max-w-[1600px] bg-[#121212] rounded-none md:rounded-xl overflow-hidden shadow-2xl flex flex-col md:flex-row border border-gray-800 h-auto md:h-[85vh]"
       >
-        
         <Link 
           to="/"
           className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-[#E50914] rounded-full text-white transition-all group hidden md:block"
@@ -100,6 +97,7 @@ const EpisodePage = ({ type }) => {
           <X size={24} className="group-hover:rotate-90 transition-transform" />
         </Link>
 
+        {/* Video Section */}
         <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full">
           <div className="w-full h-full">
              <iframe
@@ -112,6 +110,7 @@ const EpisodePage = ({ type }) => {
           </div>
         </div>
 
+        {/* Info Section */}
         <div className="w-full md:w-[30%] p-6 md:p-8 bg-[#121212] overflow-y-auto flex flex-col justify-between border-l border-gray-800 h-auto md:h-full">
           
           <div>
@@ -123,8 +122,8 @@ const EpisodePage = ({ type }) => {
               <span className="text-latent-yellow animate-pulse">PLAYING</span>
             </div>
 
-            {/* ADDED 'tracking-wider' HERE FOR READABILITY */}
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-anton leading-tight uppercase tracking-wider">
+            {/* UPDATED TITLE STYLE */}
+            <h2 className="text-2xl md:text-3xl font-anton text-white mb-4 uppercase tracking-wider leading-relaxed drop-shadow-lg">
               {episode.title}
             </h2>
             
