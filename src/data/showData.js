@@ -5,7 +5,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 01 ft @raftaarmusic @SahilKale",
     description: "Watch Online and Download INDIA'S GOT LATENT ｜ EP 01 ft @raftaarmusic. Raftaar loses his mind over a talent that defies logic! Is this the start of a revolution or a disaster? Stream absolutely free! 'Latent' is an ability that is hidden deep inside.",
     thumbnail: "/assets/thumbnails/ep1.jpg",
-    videoUrl: "https://drive.google.com/file/d/1o66J8KkpLNG1fU1d7AzK0nziH78FT73s/preview",
+    // Link 1
+    videoUrl: "https://drive.google.com/file/d/1LSfebFOrJVfLJsEkcNHkxFk1BN3Sm4Ip/preview",
     likes: 14205,
     shares: 8900,
     duration: "43:24"
@@ -17,7 +18,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 02 ft @NishantTanwar @Gamerfleet",
     description: "FULL EPISODE LEAKED: Gamerfleet and Nishant Tanwar witness the most uncomfortable performance in history. You won't believe Karan Singh's reaction! Download For Free hosted by Samay Raina.",
     thumbnail: "/assets/thumbnails/ep2.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_SHOOTING_VIDEO_ID/preview",
+    // Link 2
+    videoUrl: "https://drive.google.com/file/d/1PO66k4PHOVZ4rHqIUR0m5NtcZVnjvZ4v/preview",
     likes: 8430,
     shares: 4120,
     duration: "1:06:09"
@@ -29,7 +31,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 03 ft @UrfiJaved @AshishSolanki",
     description: "Urfi Javed vs The Contestants! Fashion meets Cringe in this explosive episode. Ashish Solanki can't stop laughing. Watch Online Free! 'Latent' is an ability that is hidden deep inside.",
     thumbnail: "/assets/thumbnails/ep3.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
+    // Link 3
+    videoUrl: "https://drive.google.com/file/d/1UmkHM6plP1Yrc7ouUJVxe3vXBdvWaNau/preview",
     likes: 15100,
     shares: 12400,
     duration: "1:05:19"
@@ -41,7 +44,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 04 ft @MaheepSingh @AmitTandon",
     description: "UNCENSORED: Maheep Singh gets angry at a contestant! The most brutal roasting session yet. Amit Tandon tries to keep the peace. Stream or download now.",
     thumbnail: "/assets/thumbnails/ep4.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
+    // Link 4
+    videoUrl: "https://drive.google.com/file/d/1WX-6cKivCGfQbTKdsvEl76upSWSrS2oq/preview",
     likes: 9200,
     shares: 5600,
     duration: "1:04:57"
@@ -53,7 +57,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 05 ft @KunalKamra @AtulKhatri",
     description: "Kunal Kamra breaks silence! The most controversial episode of the season. Atul Khatri regrets coming to the show. Watch Online For Free!",
     thumbnail: "/assets/thumbnails/ep5.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
+    // Link 5
+    videoUrl: "https://drive.google.com/file/d/1cGtP5IY9-yWwj_KI_nUdNt8zZCHu_PHt/preview",
     likes: 11500,
     shares: 7800,
     duration: "1:07:26"
@@ -65,7 +70,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 06 ft @VipulGoyal @SonaliThakker",
     description: "Vipul Goyal is speechless! A performance so bad it became legendary. Sonali and Nishant can't handle the cringe. Download Full HD.",
     thumbnail: "/assets/thumbnails/ep6.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_OTHER_VIDEO_ID/preview",
+    // Link 6
+    videoUrl: "https://drive.google.com/file/d/1o66J8KkpLNG1fU1d7AzK0nziH78FT73s/preview",
     likes: 6700,
     shares: 3200,
     duration: "1:05:28"
@@ -77,7 +83,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 07 ft @RaviGupta @Rahgir",
     description: "Desi Vibes Only! Ravi Gupta and Rahgir witness raw talent from the heartland. Emotional and hilarious moments guaranteed. Watch Free hosted by Samay Raina.",
     thumbnail: "/assets/thumbnails/ep7.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Link 7
+    videoUrl: "https://drive.google.com/file/d/1ogQpkSpYyW9birer8VKgpfoMU0XDJ4DX/preview",
     likes: 7800,
     shares: 4500,
     duration: "1:01:20"
@@ -89,7 +96,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 08 ft @PoonamPandey @SagarShah",
     description: "POONAM PANDEY SHOCKS EVERYONE! The episode that almost got banned. Vidit Gujrathi calculates the probability of survival. Stream or download now.",
     thumbnail: "/assets/thumbnails/ep8.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Link 8
+    videoUrl: "https://drive.google.com/file/d/1txqOsWlfRxX0BOYERS36KUw2IWtvRP5g/preview",
     likes: 13900,
     shares: 9100,
     duration: "54:32"

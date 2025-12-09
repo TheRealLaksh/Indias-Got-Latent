@@ -10,8 +10,8 @@ const SupremeLeaderHero = () => {
 
   // Automatically find the last episode to link to
   const latestEp = episodes[episodes.length - 1];
-  
-  const latestLink = latestEp.id > 12 
+
+  const latestLink = latestEp.id > 12
     ? `/bonus-episodes/${(latestEp.id - 12).toString().padStart(2, '0')}`
     : `/episodes/${latestEp.id.toString().padStart(2, '0')}`;
 
@@ -24,7 +24,7 @@ const SupremeLeaderHero = () => {
 
   return (
     <div className="relative w-full h-[85vh] overflow-hidden flex items-end">
-      
+
       {/* BACKGROUND VIDEO LAYER */}
       <div className="absolute inset-0 z-0">
         <video
@@ -39,15 +39,15 @@ const SupremeLeaderHero = () => {
           <source src="/assets/intro.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        
+
         {/* Gradient Overlay for Text Readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
       </div>
 
       {/* CONTENT LAYER */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 md:pb-32">
-        
-        <motion.div 
+
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -60,29 +60,26 @@ const SupremeLeaderHero = () => {
 
           {/* Title */}
           <h1 className="text-7xl md:text-9xl font-bebas text-white leading-[0.85] tracking-wide mb-6 drop-shadow-2xl">
-            INDIA'S GOT <br/>
+            INDIA'S GOT <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 animate-flicker">
               LATENT
             </span>
           </h1>
 
           <p className="max-w-xl text-gray-300 text-lg md:text-xl font-medium mb-10 leading-relaxed drop-shadow-md">
-            The only show where talent is optional and judgment is mandatory. 
-            Stream all banned, deleted, and regretted episodes here.
+            The only show where talent is optional and judgment is mandatory.Celebrating India's Hidden (and Often Hilarious) Talents! on Your Favourite Pointless Reality Show
+            . Streaming all banned, deleted, and regretted episodes here.
           </p>
 
           <div className="flex flex-col md:flex-row gap-4">
-            <Link 
+            <Link
               to={latestLink}
               className="px-8 py-4 bg-white text-black font-bebas text-2xl uppercase tracking-wide hover:bg-latent-yellow transition-all flex items-center justify-center gap-3 rounded-sm hover:scale-105"
             >
-              <Play fill="currentColor" size={24} /> 
+              <Play fill="currentColor" size={24} />
               Watch Latest Disappointment
             </Link>
-            
-            <button className="px-8 py-4 bg-transparent border border-gray-600 text-white font-bebas text-2xl uppercase tracking-wide hover:border-white hover:bg-white/5 transition-all rounded-sm">
-              Submit Your Latency
-            </button>
+
           </div>
         </motion.div>
 
