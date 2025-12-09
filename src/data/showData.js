@@ -6,7 +6,7 @@ export const episodes = [
     description: "Watch Online and Download INDIA'S GOT LATENT ｜ EP 01 ft @raftaarmusic. Raftaar loses his mind over a talent that defies logic! Is this the start of a revolution or a disaster? Stream absolutely free! 'Latent' is an ability that is hidden deep inside. If you have a 'Latent' or want to discover your latent by participating in future episodes please follow Samay Raina's instagram channel.",
     thumbnail: "/assets/thumbnails/ep1.jpg",
     // REPLACE THIS LINK WITH YOUR GOOGLE DRIVE PREVIEW LINK
-    videoUrl: "https://drive.google.com/file/d/YOUR_CODING_VIDEO_ID/preview" 
+    videoUrl: "https://drive.google.com/file/d/1o66J8KkpLNG1fU1d7AzK0nziH78FT73s/preview" 
   },
 
   // --- EPISODE 2 ---
