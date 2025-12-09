@@ -181,10 +181,7 @@ const EpisodePage = ({ type }) => {
                </button>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-red-500 mt-4 justify-center opacity-60">
-              <AlertTriangle size={12} />
-              <span>DMCA Protected Content</span>
-            </div>
+            
           </div>
 
         </div>

@@ -109,6 +109,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 09 ft @DeepakKalal @PuneetSuperstar",
     description: "CHAOS ALERT: Lord Puneet Superstar and Deepak Kalal on the same stage! Eardrums shattered, sanity lost. The wildest episode ever. Watch Online Free!",
     thumbnail: "/assets/thumbnails/ep9.jpg",
+    // Updated Link
     videoUrl: "https://drive.google.com/file/d/10Ppklfn2gxPQC63KTB_OnUDa5CbFVkVe/preview",
     likes: 14800,
     shares: 11200,
@@ -121,6 +122,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 10 ft @TanmayBhat @RaghuRam",
     description: "ROADIES FLASHBACK! Raghu Ram gets aggressive with a contestant. Tanmay Bhat laughs until he cries. Dr. Sid analyzes the mental damage. Download For Free.",
     thumbnail: "/assets/thumbnails/ep10.jpg",
+    // Updated Link
     videoUrl: "https://drive.google.com/file/d/1cy5E_7Xdf7TbG6FPSI7D-eiJ3Yisdqrb/preview",
     likes: 10500,
     shares: 6700,
@@ -133,6 +135,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 11 ft @HaarshLimbachiyaa @BhartiSingh",
     description: "Tony Kakkar finds a new singer?! Bharti and Haarsh roast the entire panel. Drew Hicks is confused. Stream or download now absolutely free!",
     thumbnail: "/assets/thumbnails/ep11.jpg",
+    // Updated Link
     videoUrl: "https://drive.google.com/file/d/1fzVOw2ljz7j_2XOhBxr-fK5THCJOybCa/preview",
     likes: 9800,
     shares: 5400,
@@ -145,6 +148,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 12 ft @RakhiSawant @AshishSolanki",
     description: "SEASON FINALE: Rakhi Sawant takes over the show! Maheep Singh gives up on life. The most dramatic ending to the latent journey. Watch Online Free!",
     thumbnail: "/assets/thumbnails/ep12.jpg",
+    // Updated Link
     videoUrl: "https://drive.google.com/file/d/1kJOlVuB1XvDuuH4rNJvhbBuWNct0q579/preview",
     likes: 15500,
     shares: 13000,
