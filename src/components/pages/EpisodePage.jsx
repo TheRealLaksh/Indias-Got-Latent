@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { episodes } from '../../data/showData';
-import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check } from 'lucide-react';
+import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 // 1. Import the Grid Component
 import ArchiveGrid from '../episodes/ArchiveGrid';
@@ -25,6 +25,9 @@ const EpisodePage = ({ type }) => {
   const [shares, setShares] = useState(episode ? episode.shares : 0);
   const [hasLiked, setHasLiked] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  
+  // NEW: State to handle "Click to Play" (Lazy Loading)
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,6 +36,8 @@ const EpisodePage = ({ type }) => {
       setShares(episode.shares);
       setHasLiked(false);
       setIsCopied(false);
+      // NEW: Reset video player when changing episodes
+      setIsPlaying(false);
     }
   }, [targetId, episode]);
 
@@ -106,16 +111,45 @@ const EpisodePage = ({ type }) => {
         </Link>
 
         {/* --- LEFT: VIDEO PLAYER (65-70%) --- */}
-        <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full">
-          <div className="w-full h-full">
-             <iframe
-              src={episode.videoUrl} 
-              className="w-full h-full"
-              allow="autoplay; fullscreen"
-              title={episode.title}
-              frameBorder="0"
-            ></iframe>
-          </div>
+        <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full group">
+          
+          {/* OPTIMIZATION: Only load iframe if isPlaying is true */}
+          {!isPlaying ? (
+            <div 
+              className="w-full h-full relative cursor-pointer group" 
+              onClick={() => setIsPlaying(true)}
+            >
+              <img 
+                src={episode.thumbnail} 
+                alt={episode.title} 
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-all duration-300"
+              />
+              
+              {/* Big Play Button Overlay */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                 <div className="bg-latent-yellow text-black p-6 md:p-8 rounded-full shadow-[0_0_40px_rgba(250,204,21,0.6)] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                    <Play size={48} fill="currentColor" className="ml-2" />
+                 </div>
+              </div>
+              
+              <div className="absolute bottom-10 left-0 right-0 text-center">
+                <p className="text-white font-bebas text-xl tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Click to Start Streaming
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="w-full h-full">
+               <iframe
+                src={episode.videoUrl} 
+                className="w-full h-full"
+                allow="autoplay; fullscreen"
+                title={episode.title}
+                frameBorder="0"
+              ></iframe>
+            </div>
+          )}
+
         </div>
 
         {/* --- RIGHT: METADATA & ACTIONS (30-35%) --- */}
@@ -181,7 +215,10 @@ const EpisodePage = ({ type }) => {
                </button>
             </div>
 
-            
+            <div className="flex items-center gap-2 text-xs text-red-500 mt-4 justify-center opacity-60">
+              <AlertTriangle size={12} />
+              <span>DMCA Protected Content</span>
+            </div>
           </div>
 
         </div>
