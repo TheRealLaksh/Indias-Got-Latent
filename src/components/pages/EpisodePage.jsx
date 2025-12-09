@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { episodes } from '../../data/showData';
 import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
+// 1. Import the Grid Component
+import ArchiveGrid from '../episodes/ArchiveGrid';
 
 const EpisodePage = ({ type }) => {
   const { epId } = useParams();
@@ -15,6 +17,9 @@ const EpisodePage = ({ type }) => {
   }
 
   const episode = episodes.find(ep => ep.id === targetId);
+
+  // 2. Filter out the current episode so it doesn't show up in the "Up Next" list
+  const remainingEpisodes = episodes.filter(ep => ep.id !== targetId);
 
   const [likes, setLikes] = useState(episode ? episode.likes : 0);
   const [shares, setShares] = useState(episode ? episode.shares : 0);
@@ -49,10 +54,12 @@ const EpisodePage = ({ type }) => {
 
   const handleShare = async () => {
     setShares(prev => prev + 1);
+    
     const baseUrl = "https://indias-got-latent.netlify.app";
     const sharePath = type === 'standard' 
       ? `/episodes/${epId}` 
       : `/bonus-episodes/${epId}`;
+      
     const shareUrl = `${baseUrl}${sharePath}`;
 
     try {
@@ -79,7 +86,7 @@ const EpisodePage = ({ type }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] flex flex-col pt-20 md:pt-0 md:justify-center items-center p-0 md:p-8">
+    <div className="min-h-screen bg-[#050505] flex flex-col pt-20 md:pt-0 items-center p-0 md:p-8">
       
       <Link to="/" className="md:hidden absolute top-4 left-4 z-50 text-white flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full">
         <ArrowLeft size={16} /> Back
@@ -90,6 +97,7 @@ const EpisodePage = ({ type }) => {
         animate={{ opacity: 1, scale: 1 }}
         className="relative w-full max-w-[1600px] bg-[#121212] rounded-none md:rounded-xl overflow-hidden shadow-2xl flex flex-col md:flex-row border border-gray-800 h-auto md:h-[85vh]"
       >
+        
         <Link 
           to="/"
           className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-[#E50914] rounded-full text-white transition-all group hidden md:block"
@@ -97,7 +105,7 @@ const EpisodePage = ({ type }) => {
           <X size={24} className="group-hover:rotate-90 transition-transform" />
         </Link>
 
-        {/* Video Section */}
+        {/* --- LEFT: VIDEO PLAYER (65-70%) --- */}
         <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full">
           <div className="w-full h-full">
              <iframe
@@ -110,7 +118,7 @@ const EpisodePage = ({ type }) => {
           </div>
         </div>
 
-        {/* Info Section */}
+        {/* --- RIGHT: METADATA & ACTIONS (30-35%) --- */}
         <div className="w-full md:w-[30%] p-6 md:p-8 bg-[#121212] overflow-y-auto flex flex-col justify-between border-l border-gray-800 h-auto md:h-full">
           
           <div>
@@ -122,7 +130,6 @@ const EpisodePage = ({ type }) => {
               <span className="text-latent-yellow animate-pulse">PLAYING</span>
             </div>
 
-            {/* Updated Font & Increased Size */}
             <h2 className="text-3xl md:text-5xl font-bebas text-white mb-4 uppercase tracking-wide leading-none">
               {episode.title}
             </h2>
@@ -139,6 +146,7 @@ const EpisodePage = ({ type }) => {
           </div>
 
           <div className="space-y-4 pb-8 md:pb-0">
+            
             <button 
               onClick={handleDownload}
               className="w-full py-4 bg-white text-black font-bold uppercase tracking-wider hover:bg-latent-yellow transition-colors flex items-center justify-center gap-2 rounded-sm"
@@ -182,6 +190,16 @@ const EpisodePage = ({ type }) => {
         </div>
 
       </motion.div>
+
+      {/* 3. NEW SECTION: THE REST OF THE ARCHIVE */}
+      <div className="w-full max-w-[1600px] mt-20 border-t border-gray-900 pt-10">
+        <h3 className="text-3xl font-bebas text-white mb-8 pl-6 md:pl-0 opacity-80">
+          More from the Archives
+        </h3>
+        {/* We reuse the grid but pass the filtered list */}
+        <ArchiveGrid episodes={remainingEpisodes} />
+      </div>
+
     </div>
   );
 };
