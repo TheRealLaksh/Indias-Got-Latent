@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { episodes } from '../../data/showData';
 import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check, Play, Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 // 1. Import the Grid Component
 import ArchiveGrid from '../episodes/ArchiveGrid';
 
@@ -26,9 +26,10 @@ const EpisodePage = ({ type }) => {
   const [hasLiked, setHasLiked] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   
-  // NEW: State to handle "Click to Play" and "Buffering"
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  // NEW: "showOverlay" controls the cover image. 
+  // We no longer unmount the iframe. We load it immediately behind the scene.
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,9 +38,9 @@ const EpisodePage = ({ type }) => {
       setShares(episode.shares);
       setHasLiked(false);
       setIsCopied(false);
-      // Reset video states when changing episodes
-      setIsPlaying(false);
-      setIsVideoLoading(true);
+      // Reset overlay when changing episodes
+      setShowOverlay(true);
+      setIsVideoLoaded(false);
     }
   }, [targetId, episode]);
 
@@ -61,10 +62,12 @@ const EpisodePage = ({ type }) => {
 
   const handleShare = async () => {
     setShares(prev => prev + 1);
+    
     const baseUrl = "https://indias-got-latent.netlify.app";
     const sharePath = type === 'standard' 
       ? `/episodes/${epId}` 
       : `/bonus-episodes/${epId}`;
+      
     const shareUrl = `${baseUrl}${sharePath}`;
 
     try {
@@ -113,51 +116,60 @@ const EpisodePage = ({ type }) => {
         {/* --- LEFT: VIDEO PLAYER (65-70%) --- */}
         <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full group">
           
-          {!isPlaying ? (
-            // 1. Facade: Show Thumbnail + Play Button (Loads Instantly)
-            <div 
-              className="w-full h-full relative cursor-pointer group" 
-              onClick={() => setIsPlaying(true)}
-            >
-              <img 
-                src={episode.thumbnail} 
-                alt={episode.title} 
-                className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-all duration-300"
-              />
-              
-              <div className="absolute inset-0 flex items-center justify-center">
-                 <div className="bg-latent-yellow text-black p-6 md:p-8 rounded-full shadow-[0_0_40px_rgba(250,204,21,0.6)] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                    <Play size={48} fill="currentColor" className="ml-2" />
-                 </div>
-              </div>
-              
-              <div className="absolute bottom-10 left-0 right-0 text-center">
-                <p className="text-white font-bebas text-xl tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Click to Start Streaming
-                </p>
-              </div>
-            </div>
-          ) : (
-            // 2. Active Player: Shows Spinner -> Then Video
-            <div className="w-full h-full relative bg-black">
-               {/* Loading Spinner Overlay */}
-               {isVideoLoading && (
-                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-20">
-                    <Loader2 size={48} className="text-latent-yellow animate-spin mb-4" />
-                    <span className="text-gray-500 font-mono text-xs animate-pulse">ESTABLISHING CONNECTION...</span>
-                 </div>
-               )}
-               
-               <iframe
-                src={episode.videoUrl} 
-                className="w-full h-full"
-                allow="autoplay; fullscreen"
-                title={episode.title}
-                frameBorder="0"
-                onLoad={() => setIsVideoLoading(false)}
-              ></iframe>
-            </div>
-          )}
+          {/* 1. THE ACTUAL PLAYER (Always Rendered, Hidden Z-Index initially) */}
+          <div className="w-full h-full relative z-0">
+             <iframe
+              src={episode.videoUrl} 
+              className="w-full h-full"
+              allow="autoplay; fullscreen"
+              title={episode.title}
+              frameBorder="0"
+              onLoad={() => setIsVideoLoaded(true)}
+            ></iframe>
+          </div>
+
+          {/* 2. THE FACADE OVERLAY (Sit on top until clicked) */}
+          <AnimatePresence>
+            {showOverlay && (
+              <motion.div 
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 z-10 w-full h-full cursor-pointer bg-black" 
+                onClick={() => setShowOverlay(false)}
+              >
+                {/* Thumbnail Image */}
+                <img 
+                  src={episode.thumbnail} 
+                  alt={episode.title} 
+                  className="w-full h-full object-cover opacity-80 transition-all duration-300"
+                />
+                
+                {/* Center Action */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                   
+                   {/* If video is still buffering in background, show spinner hint, else show Play */}
+                   {!isVideoLoaded ? (
+                      <div className="bg-black/50 backdrop-blur-md text-white p-4 rounded-full flex flex-col items-center gap-2 border border-white/10">
+                         <Loader2 size={32} className="animate-spin text-latent-yellow" />
+                         <span className="text-[10px] font-mono tracking-widest">CONNECTING...</span>
+                      </div>
+                   ) : (
+                      <div className="bg-latent-yellow text-black p-6 md:p-8 rounded-full shadow-[0_0_40px_rgba(250,204,21,0.6)] flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                        <Play size={48} fill="currentColor" className="ml-2" />
+                      </div>
+                   )}
+
+                </div>
+                
+                <div className="absolute bottom-10 left-0 right-0 text-center">
+                  <p className="text-white font-bebas text-xl tracking-wider drop-shadow-md">
+                    {isVideoLoaded ? "Click to Start Streaming" : "Preparing Stream..."}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
         </div>
 
