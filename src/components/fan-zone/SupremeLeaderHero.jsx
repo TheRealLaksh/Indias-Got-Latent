@@ -6,8 +6,8 @@ import { episodes } from '../../data/showData';
 
 const SupremeLeaderHero = () => {
   const [isMuted, setIsMuted] = useState(true);
-  // State for random sticker position
-  const [stickerPos, setStickerPos] = useState({ top: '10%', left: '10%', rotate: '0deg' });
+  // Default position: Top Right area
+  const [stickerPos, setStickerPos] = useState({ top: '15%', left: '75%', rotate: '5deg' });
   const videoRef = useRef(null);
 
   const latestEp = episodes[episodes.length - 1];
@@ -15,11 +15,12 @@ const SupremeLeaderHero = () => {
     ? `/bonus-episodes/${(latestEp.id - 12).toString().padStart(2, '0')}`
     : `/episodes/${latestEp.id.toString().padStart(2, '0')}`;
 
-  // Randomize Sticker Position on Mount
   useEffect(() => {
-    const randomTop = Math.floor(Math.random() * 60) + 10; // Between 10% and 70% vertical
-    const randomLeft = Math.floor(Math.random() * 80) + 5; // Between 5% and 85% horizontal
-    const randomRotate = Math.floor(Math.random() * 40) - 20; // Rotate between -20deg and 20deg
+    // NEW LOGIC: Constrain randomness to the "Safe Zone" (Top-Right Quadrant)
+    // This prevents it from overlapping the main text on the left/center
+    const randomTop = Math.floor(Math.random() * 30) + 10; // 10% to 40% from top
+    const randomLeft = Math.floor(Math.random() * 20) + 65; // 65% to 85% from left (Right side)
+    const randomRotate = Math.floor(Math.random() * 30) - 15; // -15 to 15 degrees tilt
     
     setStickerPos({
       top: `${randomTop}%`,
@@ -41,7 +42,7 @@ const SupremeLeaderHero = () => {
   return (
     <div className="relative w-full h-[65vh] md:h-[85vh] overflow-hidden flex items-end border-b border-white/5">
       
-      {/* BACKGROUND VIDEO LAYER */}
+      {/* LAYER 0: BACKGROUND VIDEO */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
@@ -52,12 +53,11 @@ const SupremeLeaderHero = () => {
         >
           <source src="/assets/intro.mp4" type="video/mp4" />
         </video>
-        
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-transparent md:hidden"></div>
       </div>
 
-      {/* --- THE RANDOM STICKER --- */}
+      {/* LAYER 10: STICKER (Now constrained to the right) */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -67,7 +67,7 @@ const SupremeLeaderHero = () => {
           left: stickerPos.left, 
           rotate: stickerPos.rotate 
         }}
-        className="absolute z-20 w-32 md:w-48 p-2 bg-white/10 backdrop-blur-sm border-2 border-white/50 shadow-2xl rounded-sm transform hover:scale-110 transition-transform cursor-pointer"
+        className="absolute z-20 w-28 md:w-48 p-1.5 md:p-2 bg-white/10 backdrop-blur-sm border-2 border-white/50 shadow-2xl rounded-sm transform hover:scale-110 transition-transform cursor-pointer hidden sm:block" // Hidden on very small screens if needed
         title="Supreme Leader is watching"
       >
         <img 
@@ -76,12 +76,11 @@ const SupremeLeaderHero = () => {
           className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-300" 
         />
         {/* Tape Effect */}
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-6 bg-yellow-200/80 rotate-3 shadow-sm"></div>
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-8 md:w-12 h-4 md:h-6 bg-yellow-200/80 rotate-3 shadow-sm"></div>
       </motion.div>
 
-
-      {/* CONTENT LAYER */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-12 md:pb-32 flex flex-col items-center md:items-start text-center md:text-left">
+      {/* LAYER 30: TEXT CONTENT */}
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-6 pb-12 md:pb-32 flex flex-col items-center md:items-start text-center md:text-left">
         
         <motion.div 
           initial={{ y: 50, opacity: 0 }}
