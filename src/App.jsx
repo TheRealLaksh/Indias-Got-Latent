@@ -5,7 +5,6 @@ import ArchiveGrid from './components/episodes/ArchiveGrid';
 import EpisodePage from './components/pages/EpisodePage';
 import { episodes } from './data/showData';
 
-// This component holds the "Home Page" layout
 const HomePage = () => (
   <>
     <SupremeLeaderHero />
@@ -18,14 +17,14 @@ function App() {
     <Router>
       <div className="min-h-screen bg-[#050505] text-white selection:bg-latent-yellow selection:text-black">
         
-        {/* GLOBAL NAVBAR (Visible on all pages) */}
+        {/* GLOBAL NAVBAR */}
         <nav className="fixed top-0 w-full z-40 p-6 flex justify-between items-center bg-gradient-to-b from-black/90 to-transparent pointer-events-none">
           <Link to="/" className="pointer-events-auto text-2xl font-anton text-latent-yellow tracking-tighter hover:text-white transition-colors decoration-none">
             IGL ARCHIVES
           </Link>
-          <div className="pointer-events-auto font-mono text-xs text-gray-400 border border-gray-700 px-3 py-1 rounded-full hover:bg-white hover:text-black transition cursor-pointer">
-            LOGIN / SIGNUP
-          </div>
+          
+          {/* REMOVED LOGIN BUTTON HERE */}
+          
         </nav>
 
         {/* ROUTE DEFINITIONS */}
