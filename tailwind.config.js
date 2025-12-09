@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        anton: ['"Anton"', 'sans-serif'], // The dramatic show font
-        inter: ['"Inter"', 'sans-serif'], // The clean body font
+        bebas: ['"Bebas Neue"', 'sans-serif'], 
+        inter: ['"Inter"', 'sans-serif'],
       },
       colors: {
-        'latent-yellow': '#FACC15', // Samay's brand color
+        'latent-yellow': '#FACC15',
         'latent-black': '#0a0a0a',
         'latent-gray': '#1c1c1c',
       }

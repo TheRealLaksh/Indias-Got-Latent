@@ -26,8 +26,8 @@ const SupremeLeaderHero = () => {
             The Unofficial Archive
           </div>
 
-          {/* CHANGED tracking-tighter to tracking-normal */}
-          <h1 className="text-6xl md:text-9xl font-anton text-white leading-none tracking-normal mb-4">
+          {/* New Font: Bebas Neue */}
+          <h1 className="text-7xl md:text-9xl font-bebas text-white leading-none tracking-wide mb-4">
             INDIA'S GOT <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">
               LATENT

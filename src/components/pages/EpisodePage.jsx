@@ -122,8 +122,8 @@ const EpisodePage = ({ type }) => {
               <span className="text-latent-yellow animate-pulse">PLAYING</span>
             </div>
 
-            {/* UPDATED TITLE STYLE */}
-            <h2 className="text-2xl md:text-3xl font-anton text-white mb-4 uppercase tracking-wider leading-relaxed drop-shadow-lg">
+            {/* Updated Font & Increased Size */}
+            <h2 className="text-3xl md:text-5xl font-bebas text-white mb-4 uppercase tracking-wide leading-none">
               {episode.title}
             </h2>
             

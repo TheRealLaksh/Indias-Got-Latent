@@ -19,8 +19,8 @@ const ArchiveGrid = ({ episodes }) => {
     <div className="w-full max-w-7xl mx-auto px-6 py-20">
       
       <div className="flex items-end justify-between mb-12 border-b border-gray-800 pb-4">
-        {/* REMOVED drop-shadow-lg */}
-        <h2 className="text-4xl md:text-5xl font-anton text-white uppercase tracking-normal">
+        {/* Updated Font */}
+        <h2 className="text-5xl md:text-6xl font-bebas text-white uppercase tracking-wide">
           The Archives
         </h2>
         <span className="text-gray-500 font-mono hidden md:block">TOTAL DISAPPOINTMENTS: {episodes.length}</span>
@@ -53,8 +53,8 @@ const ArchiveGrid = ({ episodes }) => {
               </div>
 
               <div>
-                {/* REMOVED drop-shadow-md */}
-                <h3 className="text-lg font-bold text-white group-hover:text-latent-yellow transition-colors line-clamp-2 leading-snug uppercase font-anton mb-2 tracking-normal">
+                {/* Updated Font & Size */}
+                <h3 className="text-2xl font-bebas text-white group-hover:text-latent-yellow transition-colors line-clamp-2 leading-none mb-2 tracking-wide">
                   {ep.title}
                 </h3>
                 <p className="text-gray-500 text-xs line-clamp-2 font-mono">
