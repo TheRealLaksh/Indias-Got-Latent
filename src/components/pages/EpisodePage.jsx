@@ -5,19 +5,17 @@ import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check } from '
 import { motion } from 'framer-motion';
 
 const EpisodePage = ({ type }) => {
-  const { epId } = useParams(); // Gets '01', '02', etc.
+  const { epId } = useParams();
   
-  // LOGIC: Find the correct ID based on the URL path
   let targetId;
   if (type === 'standard') {
-    targetId = parseInt(epId); // /episodes/01 -> ID 1
+    targetId = parseInt(epId);
   } else if (type === 'bonus') {
-    targetId = parseInt(epId) + 12; // /bonus-episodes/01 -> ID 13
+    targetId = parseInt(epId) + 12;
   }
 
   const episode = episodes.find(ep => ep.id === targetId);
 
-  // --- LOCAL STATE ---
   const [likes, setLikes] = useState(episode ? episode.likes : 0);
   const [shares, setShares] = useState(episode ? episode.shares : 0);
   const [hasLiked, setHasLiked] = useState(false);
@@ -35,7 +33,6 @@ const EpisodePage = ({ type }) => {
 
   if (!episode) return <div className="text-white pt-20 text-center">Episode Not Found</div>;
 
-  // --- HANDLERS ---
   const handleDownload = () => {
     try {
       const fileId = episode.videoUrl.match(/file\/d\/(.*?)\/preview/)?.[1];
@@ -53,7 +50,6 @@ const EpisodePage = ({ type }) => {
   const handleShare = async () => {
     setShares(prev => prev + 1);
     
-    // Construct the simplified URL for sharing
     const baseUrl = "https://indias-got-latent.netlify.app";
     const sharePath = type === 'standard' 
       ? `/episodes/${epId}` 
@@ -87,7 +83,6 @@ const EpisodePage = ({ type }) => {
   return (
     <div className="min-h-screen bg-[#050505] flex flex-col pt-20 md:pt-0 md:justify-center items-center p-0 md:p-8">
       
-      {/* Mobile Back Button */}
       <Link to="/" className="md:hidden absolute top-4 left-4 z-50 text-white flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full">
         <ArrowLeft size={16} /> Back
       </Link>
@@ -98,7 +93,6 @@ const EpisodePage = ({ type }) => {
         className="relative w-full max-w-[1600px] bg-[#121212] rounded-none md:rounded-xl overflow-hidden shadow-2xl flex flex-col md:flex-row border border-gray-800 h-auto md:h-[85vh]"
       >
         
-        {/* Desktop Close Button */}
         <Link 
           to="/"
           className="absolute top-4 right-4 z-50 p-2 bg-black/50 hover:bg-[#E50914] rounded-full text-white transition-all group hidden md:block"
@@ -106,7 +100,6 @@ const EpisodePage = ({ type }) => {
           <X size={24} className="group-hover:rotate-90 transition-transform" />
         </Link>
 
-        {/* --- LEFT: VIDEO PLAYER --- */}
         <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full">
           <div className="w-full h-full">
              <iframe
@@ -119,7 +112,6 @@ const EpisodePage = ({ type }) => {
           </div>
         </div>
 
-        {/* --- RIGHT: METADATA & ACTIONS --- */}
         <div className="w-full md:w-[30%] p-6 md:p-8 bg-[#121212] overflow-y-auto flex flex-col justify-between border-l border-gray-800 h-auto md:h-full">
           
           <div>
@@ -131,7 +123,8 @@ const EpisodePage = ({ type }) => {
               <span className="text-latent-yellow animate-pulse">PLAYING</span>
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-anton leading-tight uppercase">
+            {/* ADDED 'tracking-wider' HERE FOR READABILITY */}
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 font-anton leading-tight uppercase tracking-wider">
               {episode.title}
             </h2>
             
