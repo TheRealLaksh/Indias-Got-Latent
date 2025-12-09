@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Volume2, VolumeX, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,12 +6,27 @@ import { episodes } from '../../data/showData';
 
 const SupremeLeaderHero = () => {
   const [isMuted, setIsMuted] = useState(true);
+  // State for random sticker position
+  const [stickerPos, setStickerPos] = useState({ top: '10%', left: '10%', rotate: '0deg' });
   const videoRef = useRef(null);
 
   const latestEp = episodes[episodes.length - 1];
   const latestLink = latestEp.id > 12 
     ? `/bonus-episodes/${(latestEp.id - 12).toString().padStart(2, '0')}`
     : `/episodes/${latestEp.id.toString().padStart(2, '0')}`;
+
+  // Randomize Sticker Position on Mount
+  useEffect(() => {
+    const randomTop = Math.floor(Math.random() * 60) + 10; // Between 10% and 70% vertical
+    const randomLeft = Math.floor(Math.random() * 80) + 5; // Between 5% and 85% horizontal
+    const randomRotate = Math.floor(Math.random() * 40) - 20; // Rotate between -20deg and 20deg
+    
+    setStickerPos({
+      top: `${randomTop}%`,
+      left: `${randomLeft}%`,
+      rotate: `${randomRotate}deg`
+    });
+  }, []);
 
   const toggleMuteAndReplay = () => {
     if (videoRef.current) {
@@ -38,10 +53,32 @@ const SupremeLeaderHero = () => {
           <source src="/assets/intro.mp4" type="video/mp4" />
         </video>
         
-        {/* Stronger Gradient for Mobile Readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-transparent md:hidden"></div>
       </div>
+
+      {/* --- THE RANDOM STICKER --- */}
+      <motion.div
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1, type: "spring", stiffness: 200 }}
+        style={{ 
+          top: stickerPos.top, 
+          left: stickerPos.left, 
+          rotate: stickerPos.rotate 
+        }}
+        className="absolute z-20 w-32 md:w-48 p-2 bg-white/10 backdrop-blur-sm border-2 border-white/50 shadow-2xl rounded-sm transform hover:scale-110 transition-transform cursor-pointer"
+        title="Supreme Leader is watching"
+      >
+        <img 
+          src="/assets/samay.jpg" 
+          alt="Samay Sticker" 
+          className="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-300" 
+        />
+        {/* Tape Effect */}
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-6 bg-yellow-200/80 rotate-3 shadow-sm"></div>
+      </motion.div>
+
 
       {/* CONTENT LAYER */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-12 md:pb-32 flex flex-col items-center md:items-start text-center md:text-left">
@@ -82,7 +119,7 @@ const SupremeLeaderHero = () => {
 
       </div>
 
-      {/* VOLUME TOGGLE (Hidden on tiny screens to save space) */}
+      {/* VOLUME TOGGLE */}
       <button
         onClick={toggleMuteAndReplay}
         className="hidden md:block absolute bottom-8 right-8 z-50 p-3 bg-black/50 hover:bg-white/20 text-white rounded-full backdrop-blur-md transition-all border border-white/10"
