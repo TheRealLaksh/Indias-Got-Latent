@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { PlayCircle, Clock, TrendingUp } from 'lucide-react';
+import { Play, Clock, TrendingUp } from 'lucide-react';
 
 const ArchiveGrid = ({ episodes }) => {
   
@@ -46,13 +46,18 @@ const ArchiveGrid = ({ episodes }) => {
           <div className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
             {bonusEpisodes.map((ep) => (
               <Link to={getEpisodeLink(ep.id)} key={ep.id} className="snap-center shrink-0 w-[280px]">
-                <div className="relative aspect-video rounded-lg overflow-hidden mb-3 border border-white/10 shadow-lg">
+                <div className="relative aspect-video rounded-lg overflow-hidden mb-3 border border-white/10 shadow-lg group">
                   <img src={ep.thumbnail} alt={ep.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div className="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm text-[10px] font-bold px-2 py-1 rounded border border-white/10">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  
+                  {/* MOBILE PLAY BUTTON (New) */}
+                  <div className="absolute bottom-3 left-3 bg-latent-yellow text-black p-2 rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+                    <Play size={16} fill="currentColor" className="ml-0.5" />
+                  </div>
+
+                  <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-[10px] font-bold px-2 py-1 rounded border border-white/10">
                     {ep.duration}
                   </div>
-                  <PlayCircle className="absolute bottom-2 left-2 text-white/90" size={24} />
                 </div>
                 <h4 className="font-bebas text-lg leading-tight text-gray-100 line-clamp-1">{ep.title}</h4>
                 <p className="text-xs text-gray-500 mt-1 line-clamp-1">{ep.description}</p>
@@ -71,6 +76,12 @@ const ArchiveGrid = ({ episodes }) => {
                   {/* Small Thumbnail */}
                   <div className="relative w-32 aspect-video rounded-lg overflow-hidden shrink-0 border border-white/5">
                     <img src={ep.thumbnail} alt="" className="w-full h-full object-cover" />
+                    {/* Mini Play Icon for List */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                         <div className="bg-black/50 p-1.5 rounded-full backdrop-blur-sm border border-white/20">
+                            <Play size={12} fill="white" className="text-white ml-0.5" />
+                         </div>
+                    </div>
                   </div>
                   
                   {/* Text Info */}
@@ -113,8 +124,13 @@ const ArchiveGrid = ({ episodes }) => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                 />
                 
+                {/* PREMIUM DESKTOP PLAY BUTTON */}
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-[2px]">
-                   <PlayCircle size={48} className="text-latent-yellow drop-shadow-lg" fill="black" />
+                   <div className="transform scale-50 group-hover:scale-100 transition-transform duration-300 ease-out">
+                     <div className="bg-latent-yellow text-black p-5 rounded-full shadow-[0_0_30px_rgba(250,204,21,0.5)] flex items-center justify-center hover:scale-110 transition-transform border border-white/20">
+                       <Play size={36} fill="currentColor" className="ml-1" />
+                     </div>
+                   </div>
                 </div>
 
                 <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-0.5 font-mono rounded backdrop-blur-md border border-white/10">
