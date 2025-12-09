@@ -1,10 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link } from 'react-router-dom';
 import { PlayCircle } from 'lucide-react';
 
-// Note: Removed the onPlay prop since we use Links now
 const ArchiveGrid = ({ episodes }) => {
+  
+  // Helper to generate the correct URL based on ID
+  const getEpisodeLink = (id) => {
+    if (id <= 12) {
+      // Standard Episodes (1-12) -> /episodes/01
+      const epNum = id.toString().padStart(2, '0');
+      return `/episodes/${epNum}`;
+    } else {
+      // Bonus Episodes (13+) -> /bonus-episodes/01
+      // We subtract 12 so ID 13 becomes Bonus 01
+      const bonusNum = (id - 12).toString().padStart(2, '0');
+      return `/bonus-episodes/${bonusNum}`;
+    }
+  };
+
   return (
     <div className="w-full max-w-7xl mx-auto px-6 py-20">
       
@@ -17,7 +31,7 @@ const ArchiveGrid = ({ episodes }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {episodes.map((ep, index) => (
-          <Link to={`/watch/${ep.id}`} key={ep.id}>
+          <Link to={getEpisodeLink(ep.id)} key={ep.id}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

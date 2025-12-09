@@ -4,15 +4,24 @@ import { episodes } from '../../data/showData';
 import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const EpisodePage = () => {
-  const { id } = useParams();
-  const episode = episodes.find(ep => ep.id === parseInt(id));
+const EpisodePage = ({ type }) => {
+  const { epId } = useParams(); // Gets '01', '02', etc.
+  
+  // LOGIC: Find the correct ID based on the URL path
+  let targetId;
+  if (type === 'standard') {
+    targetId = parseInt(epId); // /episodes/01 -> ID 1
+  } else if (type === 'bonus') {
+    targetId = parseInt(epId) + 12; // /bonus-episodes/01 -> ID 13
+  }
+
+  const episode = episodes.find(ep => ep.id === targetId);
 
   // --- LOCAL STATE ---
   const [likes, setLikes] = useState(episode ? episode.likes : 0);
   const [shares, setShares] = useState(episode ? episode.shares : 0);
   const [hasLiked, setHasLiked] = useState(false);
-  const [isCopied, setIsCopied] = useState(false); // To show "Copied!" feedback
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -22,49 +31,41 @@ const EpisodePage = () => {
       setHasLiked(false);
       setIsCopied(false);
     }
-  }, [id, episode]);
+  }, [targetId, episode]);
 
   if (!episode) return <div className="text-white pt-20 text-center">Episode Not Found</div>;
 
-  // --- 1. DOWNLOAD HANDLER (Converts Preview Link to Download Link) ---
+  // --- HANDLERS ---
   const handleDownload = () => {
     try {
-      // Extract the File ID from the Google Drive URL
-      // Format: .../file/d/THE_ID_IS_HERE/preview
       const fileId = episode.videoUrl.match(/file\/d\/(.*?)\/preview/)?.[1];
-
       if (fileId) {
-        // Create the direct download URL
         const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-        // Open in new tab (Required because Google often asks for Virus Scan confirmation for large files)
         window.open(downloadUrl, '_blank');
       } else {
-        alert("Download link not available for this video source.");
+        alert("Download link not available.");
       }
     } catch (error) {
       console.error("Download Error:", error);
-      alert("Could not generate download link.");
     }
   };
 
-  // --- 2. SHARE HANDLER (Copies the Live Website URL) ---
   const handleShare = async () => {
     setShares(prev => prev + 1);
     
-    // Construct the specific URL for this episode
-    // Uses the deployed domain if available, or falls back to current location
+    // Construct the simplified URL for sharing
     const baseUrl = "https://indias-got-latent.netlify.app";
-    const shareUrl = `${baseUrl}/watch/${episode.id}`;
+    const sharePath = type === 'standard' 
+      ? `/episodes/${epId}` 
+      : `/bonus-episodes/${epId}`;
+      
+    const shareUrl = `${baseUrl}${sharePath}`;
 
     try {
       await navigator.clipboard.writeText(shareUrl);
       setIsCopied(true);
-      
-      // Reset the "Copied" status after 2 seconds
       setTimeout(() => setIsCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy text: ', err);
-      // Fallback for older browsers
       alert(`Copy this link: ${shareUrl}`);
     }
   };
@@ -105,7 +106,7 @@ const EpisodePage = () => {
           <X size={24} className="group-hover:rotate-90 transition-transform" />
         </Link>
 
-        {/* --- LEFT: VIDEO PLAYER (65-70%) --- */}
+        {/* --- LEFT: VIDEO PLAYER --- */}
         <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full">
           <div className="w-full h-full">
              <iframe
@@ -118,7 +119,7 @@ const EpisodePage = () => {
           </div>
         </div>
 
-        {/* --- RIGHT: METADATA & ACTIONS (30-35%) --- */}
+        {/* --- RIGHT: METADATA & ACTIONS --- */}
         <div className="w-full md:w-[30%] p-6 md:p-8 bg-[#121212] overflow-y-auto flex flex-col justify-between border-l border-gray-800 h-auto md:h-full">
           
           <div>
@@ -146,8 +147,6 @@ const EpisodePage = () => {
           </div>
 
           <div className="space-y-4 pb-8 md:pb-0">
-            
-            {/* REAL DOWNLOAD BUTTON */}
             <button 
               onClick={handleDownload}
               className="w-full py-4 bg-white text-black font-bold uppercase tracking-wider hover:bg-latent-yellow transition-colors flex items-center justify-center gap-2 rounded-sm"
@@ -156,7 +155,6 @@ const EpisodePage = () => {
             </button>
             
             <div className="flex gap-4">
-               {/* LIKE */}
                <button 
                  onClick={handleLike}
                  className={`flex-1 py-3 border border-gray-700 font-medium transition-colors flex items-center justify-center gap-2 rounded-sm ${
@@ -167,7 +165,6 @@ const EpisodePage = () => {
                   {formatCount(likes)}
                </button>
 
-               {/* REAL SHARE BUTTON */}
                <button 
                  onClick={handleShare}
                  className="flex-1 py-3 bg-transparent border border-gray-700 text-white font-medium hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 rounded-sm relative overflow-hidden"

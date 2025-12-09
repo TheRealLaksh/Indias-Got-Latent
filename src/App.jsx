@@ -22,15 +22,18 @@ function App() {
           <Link to="/" className="pointer-events-auto text-2xl font-anton text-latent-yellow tracking-tighter hover:text-white transition-colors decoration-none">
             IGL ARCHIVES
           </Link>
-          
-          {/* REMOVED LOGIN BUTTON */}
-          
         </nav>
 
         {/* ROUTE DEFINITIONS */}
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/watch/:id" element={<EpisodePage />} />
+          
+          {/* STANDARD EPISODES (e.g., /episodes/01) */}
+          <Route path="/episodes/:epId" element={<EpisodePage type="standard" />} />
+          
+          {/* BONUS EPISODES (e.g., /bonus-episodes/01) */}
+          <Route path="/bonus-episodes/:epId" element={<EpisodePage type="bonus" />} />
+          
         </Routes>
 
         {/* GLOBAL FOOTER */}
