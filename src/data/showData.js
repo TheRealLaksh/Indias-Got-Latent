@@ -109,7 +109,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 09 ft @DeepakKalal @PuneetSuperstar",
     description: "CHAOS ALERT: Lord Puneet Superstar and Deepak Kalal on the same stage! Eardrums shattered, sanity lost. The wildest episode ever. Watch Online Free!",
     thumbnail: "/assets/thumbnails/ep9.jpg",
-    // Updated Link
+    // Link 9
     videoUrl: "https://drive.google.com/file/d/10Ppklfn2gxPQC63KTB_OnUDa5CbFVkVe/preview",
     likes: 14800,
     shares: 11200,
@@ -122,7 +122,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 10 ft @TanmayBhat @RaghuRam",
     description: "ROADIES FLASHBACK! Raghu Ram gets aggressive with a contestant. Tanmay Bhat laughs until he cries. Dr. Sid analyzes the mental damage. Download For Free.",
     thumbnail: "/assets/thumbnails/ep10.jpg",
-    // Updated Link
+    // Link 10
     videoUrl: "https://drive.google.com/file/d/1cy5E_7Xdf7TbG6FPSI7D-eiJ3Yisdqrb/preview",
     likes: 10500,
     shares: 6700,
@@ -135,7 +135,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 11 ft @HaarshLimbachiyaa @BhartiSingh",
     description: "Tony Kakkar finds a new singer?! Bharti and Haarsh roast the entire panel. Drew Hicks is confused. Stream or download now absolutely free!",
     thumbnail: "/assets/thumbnails/ep11.jpg",
-    // Updated Link
+    // Link 11
     videoUrl: "https://drive.google.com/file/d/1fzVOw2ljz7j_2XOhBxr-fK5THCJOybCa/preview",
     likes: 9800,
     shares: 5400,
@@ -148,7 +148,7 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ EP 12 ft @RakhiSawant @AshishSolanki",
     description: "SEASON FINALE: Rakhi Sawant takes over the show! Maheep Singh gives up on life. The most dramatic ending to the latent journey. Watch Online Free!",
     thumbnail: "/assets/thumbnails/ep12.jpg",
-    // Updated Link
+    // Link 12
     videoUrl: "https://drive.google.com/file/d/1kJOlVuB1XvDuuH4rNJvhbBuWNct0q579/preview",
     likes: 15500,
     shares: 13000,
@@ -162,7 +162,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ BONUS EP 01 ft @ArpitBala @Bhappa",
     description: "The Boys are back! Arpit Bala and Bhappa roast everyone. Raw, unfiltered, and hilarious. Bonus content leaked! Stream or download now.",
     thumbnail: "/assets/thumbnails/bonus1.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Bonus 1
+    videoUrl: "https://drive.google.com/file/d/194BoPaTmNfWVwriF0GfJh6oRxrtv9LLR/preview",
     likes: 12500,
     shares: 8200,
     duration: "36:07"
@@ -173,7 +174,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ BONUS EP 02 ft @Badshah @SiddhantChaturvedi",
     description: "BADSHAH'S SECRET TALENT? Siddhant Chaturvedi drops bars. Gursimran Khamba brings the AIB nostalgia. Watch Bonus Ep 02 Free!",
     thumbnail: "/assets/thumbnails/bonus2.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Bonus 2
+    videoUrl: "https://drive.google.com/file/d/1Jw0GR4AnzNINuuNDvTPZCnejvN5Y8-eB/preview",
     likes: 11200,
     shares: 7100,
     duration: "52:08"
@@ -184,7 +186,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ BONUS EP 03 ft @AvikaGor @DeveshDixit",
     description: "Balika Vadhu shocker! Avika Gor judges the absurd. Devesh and Shashwat bring the classic comic timing. Download For Free hosted by Samay Raina.",
     thumbnail: "/assets/thumbnails/bonus3.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Bonus 3
+    videoUrl: "https://drive.google.com/file/d/1MLb0TfKNUe-sf_12TTsEwteBzVLqPPqb/preview",
     likes: 8900,
     shares: 4300,
     duration: "54:23"
@@ -195,7 +198,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ BONUS EP 04 ft @SeedheMaut",
     description: "SEEDHE MAUT IN THE HOUSE! TBSM fans assemble. Madhur and Kaustubh create chaos. The most hyped bonus episode. Stream or download now.",
     thumbnail: "/assets/thumbnails/bonus4.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Bonus 4
+    videoUrl: "https://drive.google.com/file/d/1QNCbvGozUsEU6Rk1VUYciXauTK5mmpja/preview",
     likes: 14200,
     shares: 9800,
     duration: "1:12:25"
@@ -206,7 +210,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ BONUS EP 05 ft @RohanJoshi @SahilShah",
     description: "SNG Reunion? Rohan Joshi and Sahil Shah roast bad talents. Vaibhav Munjal questions reality. Chandni mimics the contestants. Watch Online Free!",
     thumbnail: "/assets/thumbnails/bonus5.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Bonus 5
+    videoUrl: "https://drive.google.com/file/d/1XJB2lz8uHt65_FFLr0xy3QU3XJ2f76Hx/preview",
     likes: 7500,
     shares: 3100,
     duration: "1:29:05"
@@ -217,7 +222,8 @@ export const episodes = [
     title: "INDIA'S GOT LATENT ｜ BONUS EP 06 ft @AshishChanchlani @RanveerAllahbadia",
     description: "YETI VS REBEL KID! Ashish Chanchlani and Ranveer Allahbadia discuss aliens and latent talents. Jaspreet Singh laughs out loud. Download For Free.",
     thumbnail: "/assets/thumbnails/bonus6.jpg",
-    videoUrl: "https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview",
+    // Bonus 6
+    videoUrl: "https://drive.google.com/file/d/1zvx8U_MPHnWjlgbRk3HQMHSSIG9Zi1iu/preview",
     likes: 13500,
     shares: 8900,
     duration: "1:03:09"
