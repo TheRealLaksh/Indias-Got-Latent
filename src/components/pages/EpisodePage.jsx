@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { episodes } from '../../data/showData';
-import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check, Play } from 'lucide-react';
+import { X, ThumbsUp, Share2, AlertTriangle, Download, ArrowLeft, Check, Play, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 // 1. Import the Grid Component
 import ArchiveGrid from '../episodes/ArchiveGrid';
@@ -26,8 +26,9 @@ const EpisodePage = ({ type }) => {
   const [hasLiked, setHasLiked] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   
-  // NEW: State to handle "Click to Play" (Lazy Loading)
+  // NEW: State to handle "Click to Play" and "Buffering"
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,8 +37,9 @@ const EpisodePage = ({ type }) => {
       setShares(episode.shares);
       setHasLiked(false);
       setIsCopied(false);
-      // NEW: Reset video player when changing episodes
+      // Reset video states when changing episodes
       setIsPlaying(false);
+      setIsVideoLoading(true);
     }
   }, [targetId, episode]);
 
@@ -59,12 +61,10 @@ const EpisodePage = ({ type }) => {
 
   const handleShare = async () => {
     setShares(prev => prev + 1);
-    
     const baseUrl = "https://indias-got-latent.netlify.app";
     const sharePath = type === 'standard' 
       ? `/episodes/${epId}` 
       : `/bonus-episodes/${epId}`;
-      
     const shareUrl = `${baseUrl}${sharePath}`;
 
     try {
@@ -93,7 +93,7 @@ const EpisodePage = ({ type }) => {
   return (
     <div className="min-h-screen bg-[#050505] flex flex-col pt-20 md:pt-0 items-center p-0 md:p-8">
       
-      <Link to="/" className="md:hidden absolute top-4 left-4 z-50 text-white flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full">
+      <Link to="/" className="md:hidden absolute top-4 left-4 z-50 text-white flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full backdrop-blur-md">
         <ArrowLeft size={16} /> Back
       </Link>
 
@@ -113,8 +113,8 @@ const EpisodePage = ({ type }) => {
         {/* --- LEFT: VIDEO PLAYER (65-70%) --- */}
         <div className="w-full md:w-[70%] bg-black relative flex items-center justify-center h-[40vh] md:h-full group">
           
-          {/* OPTIMIZATION: Only load iframe if isPlaying is true */}
           {!isPlaying ? (
+            // 1. Facade: Show Thumbnail + Play Button (Loads Instantly)
             <div 
               className="w-full h-full relative cursor-pointer group" 
               onClick={() => setIsPlaying(true)}
@@ -125,7 +125,6 @@ const EpisodePage = ({ type }) => {
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-all duration-300"
               />
               
-              {/* Big Play Button Overlay */}
               <div className="absolute inset-0 flex items-center justify-center">
                  <div className="bg-latent-yellow text-black p-6 md:p-8 rounded-full shadow-[0_0_40px_rgba(250,204,21,0.6)] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
                     <Play size={48} fill="currentColor" className="ml-2" />
@@ -139,13 +138,23 @@ const EpisodePage = ({ type }) => {
               </div>
             </div>
           ) : (
-            <div className="w-full h-full">
+            // 2. Active Player: Shows Spinner -> Then Video
+            <div className="w-full h-full relative bg-black">
+               {/* Loading Spinner Overlay */}
+               {isVideoLoading && (
+                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-20">
+                    <Loader2 size={48} className="text-latent-yellow animate-spin mb-4" />
+                    <span className="text-gray-500 font-mono text-xs animate-pulse">ESTABLISHING CONNECTION...</span>
+                 </div>
+               )}
+               
                <iframe
                 src={episode.videoUrl} 
                 className="w-full h-full"
                 allow="autoplay; fullscreen"
                 title={episode.title}
                 frameBorder="0"
+                onLoad={() => setIsVideoLoading(false)}
               ></iframe>
             </div>
           )}
